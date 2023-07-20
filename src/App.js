@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react'
+import axios from 'axios'
+import "./App.css"
 
-function App() {
+const App = () => {
+  const [weather, setWeather] = useState()
+  const [name, setName] = useState()
+  const [feels_like, setFeelsLike] = useState()
+  const [humidity, setHumidity] = useState()
+  const api_key = '75d97d35ae146396198e702cd8a0165a'
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(position => {
+      const { latitude, longitude } = position.coords;
+       axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${api_key}&units=metric`)
+      .then((response) => {
+        setName(response.data.name)
+        setWeather(Math.floor(Math.round(response.data.main.temp)))
+        setFeelsLike(Math.floor(Math.round(response.data.main.feels_like)))
+        setHumidity(Math.floor(Math.round(response.data.main.humidity)))
+      })
+    });
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+    <div className='weather_card'>
+      <div className='weather_main'>
+        <p className='weather_name'>
+          {name}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <i className="fa-solid fa-cloud weather_icon"></i>
+      </div>
+      <p className='weather_temp'>
+        {weather} °C
+      </p>
+      {weather !== feels_like &&
+      <p className='weather_feelslike'>Feels like: {feels_like} °C</p>
+      }
+      <p className='weather_humidity'>Humidity: {humidity} %</p>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

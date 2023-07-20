@@ -1,38 +1,59 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(111.5deg, rgb(187, 232, 255) 11.1%, rgb(4, 78, 116) 107.5%);
+}
+
+.weather_main {
+  display: flex;
+  flex-direction: row;
+}
+.weather_icon {
+  font-size: 100px;
+}
+
+.weather_temp {
+  font-size: x-large;
+  text-align: center;
+  margin-bottom: 75px;
+}
+
+.weather_name {
+  font-size: xx-large;
+  font-weight: bold;
+  margin-right: 10vw;
+}
+
+.weather_feelslike {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.weather_humidity {
+  text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media (max-width: 500px) {
+  .weather_name {
+    margin-right: 4vw;
+  }
+  .weather_icon {
+    font-size: 80px;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (max-width: 350px) {
+  .weather_main {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+  .weather_icon {
+    align-self: center;
+    margin-right: 0px;
   }
 }
